@@ -1,0 +1,9 @@
+use studentdetails;
+
+create table track(id int, name varchar(20), location varchar(40), distance bigint, time timestamp);
+
+insert into track values (1, "hemant", "Powai", 1234, "2023-12-15 02:20:35");
+
+select * from track where location ="Powai";
+select * from track where distance > 500;
+select * from track where time < "2024-01-01 00:00:00";

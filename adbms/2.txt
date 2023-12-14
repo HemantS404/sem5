@@ -1,0 +1,7 @@
+select * from film_list where category='Horror' or rating="PG";
+select max(price), min(price), avg(price) from film_list;
+select * from film_list fl join film f on f.film_id = fl.FID ;
+
+optimize table flim;
+
+create index idx_film on film(film_id);

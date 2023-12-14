@@ -1,0 +1,101 @@
+use studentdetails;
+
+create table student1(
+	id int primary key, 
+	name varchar(20), 
+    section varchar(5), 
+    addr varchar(20))
+partition by key()
+partitions 4;
+
+insert into student1 values (1, "Hemant", 'A', 'NCH'),
+							(2, "Shubham", 'B', 'NCH'),
+                            (3, "Sahil", 'C', 'NCH'),
+                            (4, "Jenil", 'D', 'NCH'),
+                            (5, "Vatsal", 'A', 'NCH'),
+                            (6, "Swapnil", 'B', 'NCH'),
+                            (7, "Devang", 'C', 'NCH'),
+                            (8, "Varun", 'D', 'NCH');
+select * from student1 partition(p0);
+select * from student1 partition(p1);
+select * from student1 partition(p2);
+select * from student1 partition(p3);
+
+
+
+use studentdetails;
+
+create table student2(
+	id int primary key, 
+	name varchar(20), 
+    section varchar(5), 
+    addr varchar(20))
+partition by hash(id)
+partitions 4;
+
+insert into student2 values (1, "Hemant", 'A', 'NCH'),
+							(2, "Shubham", 'B', 'NCH'),
+                            (3, "Sahil", 'C', 'NCH'),
+                            (4, "Jenil", 'D', 'NCH'),
+                            (5, "Vatsal", 'A', 'NCH'),
+                            (6, "Swapnil", 'B', 'NCH'),
+                            (7, "Devang", 'C', 'NCH'),
+                            (8, "Varun", 'D', 'NCH');
+select * from student2 partition(p0);
+select * from student2 partition(p1);
+select * from student2 partition(p2);
+select * from student2 partition(p3);
+
+
+
+use studentdetails;
+
+create table student3(
+	id int primary key, 
+	name varchar(20), 
+    section varchar(5), 
+    addr varchar(20))
+partition by range(id)(
+partition p0 values less than (4),
+partition p1 values less than (7),
+partition p2 values less than (9));
+
+insert into student3 values (1, "Hemant", 'A', 'NCH'),
+							(2, "Shubham", 'B', 'NCH'),
+                            (3, "Sahil", 'C', 'NCH'),
+                            (4, "Jenil", 'D', 'NCH'),
+                            (5, "Vatsal", 'A', 'NCH'),
+                            (6, "Swapnil", 'B', 'NCH'),
+                            (7, "Devang", 'C', 'NCH'),
+                            (8, "Varun", 'D', 'NCH');
+select * from student3 partition(p0);
+select * from student3 partition(p1);
+select * from student3 partition(p2);
+select * from student3 partition(p3);
+
+
+
+use studentdetails;
+
+create table student4(
+	id int primary key, 
+	name varchar(20), 
+    section varchar(5), 
+    addr varchar(20))
+partition by list(id)(
+partition p0 values in (1,2,3),
+partition p1 values in (4,5,6),
+partition p2 values in (7,8,9));
+
+insert into student4 values (1, "Hemant", 'A', 'NCH'),
+							(2, "Shubham", 'B', 'NCH'),
+                            (3, "Sahil", 'C', 'NCH'),
+                            (4, "Jenil", 'D', 'NCH'),
+                            (5, "Vatsal", 'A', 'NCH'),
+                            (6, "Swapnil", 'B', 'NCH'),
+                            (7, "Devang", 'C', 'NCH'),
+                            (8, "Varun", 'D', 'NCH');
+select * from student4 partition(p0);
+select * from student4 partition(p1);
+select * from student4 partition(p2);
+select * from student4 partition(p3);

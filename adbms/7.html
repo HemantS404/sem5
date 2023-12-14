@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>7 XML</title>
+    </head>
+    <style>
+        table, th, td{
+            border: 3px solid;
+        }
+    </style>
+    <body>
+        <button onclick="renderxml()">Click Here to render XML</button>
+        <div class="table"></div>
+    </body>
+    <script>
+        function renderxml(){
+            var data =`
+            <catlog>
+            <book>
+                <name>Harry Potter</name>
+                <genre>Magic</genre>
+                <author>J. K. Rowlings</author>
+            </book>
+            <book>
+                <name>Let it Snow</name>
+                <genre>Romantic</genre>
+                <author>Albert Meow</author>
+                </book>
+            </catlog
+            `
+            const parser = new DOMParser();
+            var parserData = parser.parseFromString(data, 'text/xml')
+            table = document.querySelector('.table')
+            table.innerHTML +=`<table class='innerTable'>
+                <tr>
+                    <th>Name</th>
+                    <th>Genre</th>
+                    <th>Author</th>
+                </tr>
+                </table>`
+            books = parserData.querySelector('catlog').querySelectorAll('book')
+            table = document.querySelector('.innertable')
+            for (i=0; i<books.length; i++){
+                table.innerHTML += `
+                <tr>
+                    <td>${books[i].querySelector('name').textContent}</td>
+                    <td>${books[i].querySelector('genre').textContent}</td>
+                    <td>${books[i].querySelector('author').textContent}</td>
+                </tr>`
+            }
+        }
+    </script>
+</html>
